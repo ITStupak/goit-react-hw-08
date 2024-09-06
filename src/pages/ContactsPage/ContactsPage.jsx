@@ -1,13 +1,14 @@
-import ContactForm from "./components/ContactForm/ContactForm";
-import SearchBox from "./components/SearchBox/SearchBox";
-import ContactList from "./components/ContactList/ContactList";
-import "./ContactsPage.module.css";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { fetchContacts } from "./redux/contacts/operations";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchContacts } from "../../redux/contacts/operations";
+import { selectIsLoading } from "../../redux/contacts/selectors";
+import ContactForm from "../../components/ContactForm/ContactForm";
+import SearchBox from "../../components/SearchBox/SearchBox";
+import ContactList from "../../components/ContactList/ContactList";
 
-const Contacts = () => {
+const ContactsPage = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -15,6 +16,7 @@ const Contacts = () => {
 
   return (
     <>
+      {isLoading && "Request in progress..."}
       <h1 className="title">Phonebook</h1>
       <div className="form_wrapper">
         <ContactForm />
@@ -25,4 +27,4 @@ const Contacts = () => {
   );
 };
 
-export default Contacts;
+export default ContactsPage;

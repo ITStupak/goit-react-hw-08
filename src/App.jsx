@@ -1,83 +1,59 @@
-import ContactForm from "./components/ContactForm/ContactForm";
-import SearchBox from "./components/SearchBox/SearchBox";
-import ContactList from "./components/ContactList/ContactList";
-import "./App.css";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { fetchContacts } from "./redux/contacts/operations";
+import { useDispatch, useSelector } from "react-redux";
+import { lazy, useEffect } from "react";
+import { refresh } from "./redux/auth/operations";
+import { selectIsRefreshing } from "./redux/auth/selectors";
+import { Route, Routes } from "react-router-dom";
+import { RestrictedRoute } from "./components/RestrictedRoute/RestrictedRoute";
+import { PrivateRoute } from "./components/PrivateRoute/PrivateRoute";
+import { Layout } from "./components/Layout/Layout";
+import ContactsPage from "./pages/ContactsPage/ContactsPage";
+
+const Contacts = lazy(() => import("./pages/ContactsPage/ContactsPage"));
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
+const RegistrationPage = lazy(() =>
+  import("./pages/RegistrationPage/RegistrationPage")
+);
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(refresh());
   }, [dispatch]);
 
-  return (
-    <>
-      <h1 className="title">Phonebook</h1>
-      <div className="form_wrapper">
-        <ContactForm />
-        <SearchBox />
-      </div>
-      <ContactList />
-    </>
+  const isRefreshing = useSelector(selectIsRefreshing);
+
+  return isRefreshing ? (
+    <b>Refreshing user...</b>
+  ) : (
+    <Layout>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute
+              redirectTo="/contacts"
+              component={<RegistrationPage />}
+            />
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute redirectTo="/contacts" component={<LoginPage />} />
+          }
+        />
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
+          }
+        />
+      </Routes>
+    </Layout>
   );
 };
 
 export default App;
-
-// import { useDispatch, useSelector } from "react-redux";
-// import { lazy, useEffect } from "react";
-// import { Route, Routes } from "react-router-dom";
-// import { RestrictedRoute } from "./RestrictedRoute";
-// import { PrivateRoute } from "./PrivateRoute";
-// import { refreshUser } from "./redux/auth/operations";
-// import { Layout } from "./Layout";
-// import { selectIsRefreshing } from "./redux/auth/selectors";
-
-// const Contacts = lazy(() => import("./pages/Contacts"));
-// const HomePage = lazy(() => import("./pages/HomePage"));
-// const LoginPage = lazy(() => import("./pages/LoginPage"));
-// const RegistrationPage = lazy(() => import("./pages/RegistrationPage"));
-
-// const App = () => {
-//   const dispatch = useDispatch();
-
-//   useEffect(() => {
-//     dispatch(refreshUser());
-//   }, [dispatch]);
-
-//   const isRefreshing = useSelector(selectIsRefreshing);
-
-//   return isRefreshing ? <b>Refreshing user...</b> : (
-//     <Layout>
-//       <Routes>
-//         <Route path="/" element={<HomePage />} />
-//         <Route
-//           path="/register"
-//           element={
-//             <RestrictedRoute
-//               redirectTo="/contacts"
-//               component={<RegistrationPage />}
-//             />
-//           }
-//         />
-//         <Route
-//           path="/login"
-//           element={
-//             <RestrictedRoute redirectTo="/contacts" component={<LoginPage />} />
-//           }
-//         />
-//         <Route
-//           path="/contacts"
-//           element={
-//             <PrivateRoute redirectTo="/login" component={<Contacts />} />
-//           }
-//         />
-//       </Routes>
-//     </Layout>
-//   );
-// };
-
-// export default App;

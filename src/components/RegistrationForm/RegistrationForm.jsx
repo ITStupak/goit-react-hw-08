@@ -1,8 +1,8 @@
 import { Field, Formik, Form } from "formik";
-// import { useId } from "react";
+import { useId } from "react";
 import { register } from "../../redux/auth/operations";
 import { useDispatch } from "react-redux";
-import css from "../ContackForm/ContactForm.module.css";
+import css from "../RegistrationForm/RegistrationForm.module.css";
 
 const RegistrationForm = () => {
   const initialValues = { name: "", email: "", password: "" };
