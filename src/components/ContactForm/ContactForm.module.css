@@ -1,7 +1,7 @@
 .form {
-  border: 1px solid rgb(60, 60, 60);
+  border: 1px solid #3c3c3c;
   border-radius: 10px;
-  background-color: rgb(228, 236, 194);
+  background-color: #e4ecc2;
   padding: 8px;
   width: 504px;
   display: flex;
@@ -21,12 +21,17 @@
   min-width: 286px;
   padding: 6px 12px;
   outline: none;
-  border: 1px solid rgb(60, 60, 60);
+  border: 1px solid #3c3c3c;
   border-radius: 10px;
   font-size: 18px;
+  background-color: #c8d5c2;
+  transition: background-color linear 250ms;
 }
 .input::placeholder {
   font-size: 14px;
+}
+.input:hover {
+  background-color: #fff;
 }
 .input:focus {
   border-color: blue;
@@ -38,10 +43,12 @@
   font-size: 16px;
   border: 1px solid rgb(60, 60, 60);
   border-radius: 10px;
-  transition: color cubic-bezier(0, 4, 1, 4) 250ms;
+  background-color: #fff;
+  transition: background-color linear 250ms, color linear 250ms;
 }
 .form-btn:hover {
-  background-color: rgb(166, 230, 186);
+  background-color: rgb(60, 60, 60);
+  color: #fff;
   cursor: pointer;
 }
 .errorText {

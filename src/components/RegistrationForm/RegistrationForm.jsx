@@ -1,24 +1,23 @@
-import { Field, Formik, Form } from "formik";
-import { useId } from "react";
-import { register } from "../../redux/auth/operations";
+import { nanoid } from "nanoid";
 import { useDispatch } from "react-redux";
+import { register } from "../../redux/auth/operations";
+import { Formik, Form, Field } from "formik";
 import css from "../RegistrationForm/RegistrationForm.module.css";
 
 const RegistrationForm = () => {
-  const initialValues = { name: "", email: "", password: "" };
-  const nameId = useId();
-  const emailId = useId();
-  const passwordId = useId();
+  const INITIAL_VALUES = { name: "", email: "", password: "" };
+  const nameId = nanoid();
+  const emailId = nanoid();
+  const passwordId = nanoid();
   const dispatch = useDispatch();
   const handleSubmit = (values, action) => {
     dispatch(register(values));
-    console.log(values);
     action.resetForm();
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      <Form className={css.container}>
+    <Formik initialValues={INITIAL_VALUES} onSubmit={handleSubmit}>
+      <Form className={css.form}>
         <label htmlFor="nameId" className={css.label}>
           Name
         </label>
@@ -26,7 +25,7 @@ const RegistrationForm = () => {
           type="text"
           name="name"
           id={nameId}
-          className={css.field}
+          className={css.input}
         ></Field>
         <label htmlFor="emailId" className={css.label}>
           Email
@@ -35,7 +34,7 @@ const RegistrationForm = () => {
           type="email"
           name="email"
           id={emailId}
-          className={css.field}
+          className={css.input}
         ></Field>
         <label htmlFor="passwordId" className={css.label}>
           Password
@@ -44,7 +43,7 @@ const RegistrationForm = () => {
           type="password"
           name="password"
           id={passwordId}
-          className={css.field}
+          className={css.input}
         ></Field>
         <button type="submit" className={css.button}>
           Sign up

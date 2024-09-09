@@ -3,9 +3,9 @@ import css from "./AuthNav.module.css";
 
 const AuthNav = () => {
   return (
-    <div className={css.authLinks}>
+    <div className={css.links_wrap}>
       <NavLink to="/login" className={css.link}>
-        Log in
+        Login
       </NavLink>
       <NavLink to="/register" className={css.link}>
         Sign up

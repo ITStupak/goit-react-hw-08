@@ -28,9 +28,14 @@
   border: 1px solid rgb(60, 60, 60);
   border-radius: 10px;
   font-size: 18px;
+  background-color: #c8d5c2;
+  transition: background-color linear 250ms;
 }
 .search-input:focus {
   border-color: blue;
+}
+.search-input:hover {
+  background-color: #fff;
 }
 .search-input::placeholder {
   font-size: 14px;

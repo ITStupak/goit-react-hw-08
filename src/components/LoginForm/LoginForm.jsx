@@ -1,13 +1,13 @@
-import { Field, Formik, Form } from "formik";
-import { useId } from "react";
-import { login } from "../../redux/auth/operations";
+import { nanoid } from "nanoid";
 import { useDispatch } from "react-redux";
+import { Formik, Form, Field } from "formik";
+import { login } from "../../redux/auth/operations";
 import css from "../LoginForm/LoginForm.module.css";
 
 const LoginForm = () => {
-  const initialValues = { email: "", password: "" };
-  const emailId = useId();
-  const passwordId = useId();
+  const INITIAL_VALUES = { email: "", password: "" };
+  const emailId = nanoid();
+  const passwordId = nanoid();
   const dispatch = useDispatch();
   const handleSubmit = (values, action) => {
     dispatch(login(values));
@@ -15,8 +15,8 @@ const LoginForm = () => {
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      <Form className={css.container}>
+    <Formik initialValues={INITIAL_VALUES} onSubmit={handleSubmit}>
+      <Form className={css.form}>
         <label htmlFor="emailId" className={css.label}>
           Email
         </label>
@@ -24,7 +24,7 @@ const LoginForm = () => {
           type="email"
           name="email"
           id={emailId}
-          className={css.field}
+          className={css.input}
         ></Field>
         <label htmlFor="passwordId" className={css.label}>
           Password
@@ -33,10 +33,10 @@ const LoginForm = () => {
           type="password"
           name="password"
           id={passwordId}
-          className={css.field}
+          className={css.input}
         ></Field>
         <button type="submit" className={css.button}>
-          Sign up
+          Login
         </button>
       </Form>
     </Formik>

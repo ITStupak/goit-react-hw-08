@@ -8,11 +8,11 @@ const UserMenu = () => {
     dispatch(logout());
   };
   return (
-    <div className={css.buttonDiv}>
+    <>
       <button onClick={handleLogout} className={css.button}>
-        Log out
+        Logout
       </button>
-    </div>
+    </>
   );
 };
 
