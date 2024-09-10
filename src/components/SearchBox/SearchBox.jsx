@@ -13,19 +13,18 @@ const SearchBox = () => {
 
   return (
     <div className={css["filter-wrapper"]}>
-      <div className={css.search}>
-        <label className={css["search-label"]}>
-          <span>Find contacts by name:</span>
-          <input
-            className={css["search-input"]}
-            type="text"
-            placeholder="Enter your characters..."
-            autoComplete="off"
-            value={filterValue}
-            onChange={handleSearch}
-          />
-        </label>
-      </div>
+      <label className={css["search-label"]}>
+        <span>Find contacts by name:</span>
+        <input
+          className={css["search-input"]}
+          type="text"
+          name="search"
+          placeholder="Enter your characters..."
+          autoComplete="off"
+          value={filterValue}
+          onChange={handleSearch}
+        />
+      </label>
     </div>
   );
 };

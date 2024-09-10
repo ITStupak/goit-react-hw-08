@@ -1,7 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { lazy, useEffect } from "react";
 import { refresh } from "./redux/auth/operations";
-import { selectIsRefreshing } from "./redux/auth/selectors";
+import {
+  // selectIsLoggedIn,
+  selectIsRefreshing,
+  // selectUser,
+} from "./redux/auth/selectors";
 import { Layout } from "./components/Layout";
 import { Route, Routes } from "react-router-dom";
 import { RestrictedRoute } from "./components/RestrictedRoute";
@@ -16,6 +20,8 @@ const RegistrationPage = lazy(() =>
 
 const App = () => {
   const dispatch = useDispatch();
+  // const isLoggedIn = useSelector(selectIsLoggedIn);
+  // const user = useSelector(selectUser);
 
   useEffect(() => {
     dispatch(refresh());

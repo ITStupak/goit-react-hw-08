@@ -5,7 +5,7 @@
 }
 .link {
   min-width: 40px;
-  width: 100px;
+  width: 80px;
   padding: 6px;
   border: 1px solid black;
   border-radius: 10px;
@@ -14,8 +14,7 @@
   transition: border-color linear 250ms, background-color linear 250ms,
     color linear 250ms;
 }
-.link:hover,
-.link:focus {
+.link:hover {
   border-color: #0a500a;
   color: #fff;
   background-color: #3c3c3c;

@@ -9,6 +9,7 @@ const UserMenu = () => {
   };
   return (
     <>
+      {/* <p className={css.text}>Welcome {user}!</p> */}
       <button onClick={handleLogout} className={css.button}>
         Logout
       </button>

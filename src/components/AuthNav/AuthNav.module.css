@@ -4,7 +4,7 @@
 }
 .link {
   min-width: 40px;
-  width: 100px;
+  width: 80px;
   padding: 6px;
   border: 1px solid black;
   border-radius: 10px;
@@ -16,4 +16,9 @@
   color: #fff;
   background-color: #3c3c3c;
   cursor: pointer;
+}
+.active {
+  background-color: #0a500a;
+  color: #fff;
+  font-weight: 500;
 }
