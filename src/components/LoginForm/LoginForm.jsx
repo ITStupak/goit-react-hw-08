@@ -28,7 +28,7 @@ const LoginForm = () => {
     dispatch(login(values))
       .unwrap()
       .then((data) => {
-        toast.success(`Hello ${data.user.name}!`);
+        toast.success(`Hello, ${data.user.name}!`);
       })
       .catch(() => {
         toast.error("Wrong login or password!");

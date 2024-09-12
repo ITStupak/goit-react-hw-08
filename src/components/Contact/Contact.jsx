@@ -4,18 +4,18 @@ import css from "./Contact.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteContact } from "../../redux/contacts/operations";
 import { selectIsLoading } from "../../redux/contacts/selectors";
+import toast from "react-hot-toast";
 
 const Contact = ({ id, name, number }) => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
 
-  const handleDeleteContact = (contactId) => {
-    dispatch(deleteContact(contactId))
+  const onDeleteContact = () => {
+    dispatch(deleteContact(id))
       .unwrap()
       .then((data) => {
         toast.success(`Contact ${data.name} was deleted!`);
-      })
-      .catch(toast.error("Something went wrong"));
+      });
   };
 
   return (
@@ -36,7 +36,7 @@ const Contact = ({ id, name, number }) => {
         disabled={isLoading}
         type="button"
         className={css["card-btn"]}
-        onClick={() => dispatch(deleteContact(id))}
+        onClick={onDeleteContact}
       >
         Delete&nbsp;❌
       </button>

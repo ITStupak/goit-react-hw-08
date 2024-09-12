@@ -10,6 +10,7 @@ import SearchBox from "../../components/SearchBox/SearchBox";
 import ContactList from "../../components/ContactList/ContactList";
 import css from "./ContactsPage.module.css";
 import { Loader } from "../../components/Loader";
+import toast from "react-hot-toast";
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,11 @@ const ContactsPage = () => {
   const contacts = useSelector(selectContacts);
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(fetchContacts())
+      .unwrap()
+      .then((data) => {
+        toast.success("Contacts loaded successfully! 🎉");
+      });
   }, [dispatch]);
 
   return (

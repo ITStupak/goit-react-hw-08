@@ -4,7 +4,6 @@ import { register } from "../../redux/auth/operations";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import css from "../RegistrationForm/RegistrationForm.module.css";
-import { selectError } from "../../redux/auth/selectors";
 import toast from "react-hot-toast";
 
 const RegistrationForm = () => {
@@ -27,6 +26,7 @@ const RegistrationForm = () => {
   const nameId = nanoid();
   const emailId = nanoid();
   const passwordId = nanoid();
+
   const dispatch = useDispatch();
   const handleSubmit = (values, action) => {
     dispatch(register(values))
@@ -39,7 +39,6 @@ const RegistrationForm = () => {
       });
     action.resetForm();
   };
-  const error = useSelector(selectError);
 
   return (
     <Formik

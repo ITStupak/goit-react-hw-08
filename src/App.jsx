@@ -1,17 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { lazy, useEffect } from "react";
-import { refresh } from "./redux/auth/operations";
-import {
-  // selectIsLoggedIn,
-  selectIsRefreshing,
-  // selectUser,
-} from "./redux/auth/selectors";
 import { Layout } from "./components/Layout";
 import { Route, Routes } from "react-router-dom";
 import { RestrictedRoute } from "./components/RestrictedRoute";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { Loader } from "./components/Loader";
 import "./App.css";
+import { refresh } from "./redux/auth/operations";
+import { selectIsRefreshing } from "./redux/auth/selectors";
 
 const ContactsPage = lazy(() => import("./pages/ContactsPage/ContactsPage"));
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
