@@ -5,6 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import css from "../RegistrationForm/RegistrationForm.module.css";
 import { selectError } from "../../redux/auth/selectors";
+import toast from "react-hot-toast";
 
 const RegistrationForm = () => {
   const emailRegExp = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
@@ -17,8 +18,8 @@ const RegistrationForm = () => {
       .matches(emailRegExp, "Email is not valid!")
       .required("Required Email "),
     password: Yup.string()
-      .min(8, "Password Is Too Short!")
-      .max(30, "Password Is Too Long!")
+      .min(8, "Password must be 8 characters min!")
+      .max(30, "Password must be 30 characters max!")
       .required("Required Password"),
   });
 
@@ -28,7 +29,14 @@ const RegistrationForm = () => {
   const passwordId = nanoid();
   const dispatch = useDispatch();
   const handleSubmit = (values, action) => {
-    dispatch(register(values));
+    dispatch(register(values))
+      .unwrap()
+      .then((data) => {
+        toast.success(`${data.user.name} is successfully registered!`);
+      })
+      .catch(() => {
+        toast.error("Email is already registered!");
+      });
     action.resetForm();
   };
   const error = useSelector(selectError);
@@ -96,11 +104,6 @@ const RegistrationForm = () => {
           >
             Sign Up
           </button>
-          {error && (
-            <span className={css.errorText}>
-              Oops, some error occured {error}
-            </span>
-          )}
         </Form>
       )}
     </Formik>

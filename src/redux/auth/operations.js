@@ -5,11 +5,11 @@ axios.defaults.baseURL = 'https://connections-api.goit.global';
 
 const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-};
+}; // add JWT
 
 const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
-};
+}; // remove JWT
 
 // POST @ /users/signup
 // body: { name, email, password }
@@ -19,6 +19,7 @@ export const register = createAsyncThunk(
     async (formData, thunkApi) => {
         try {
             const { data } = await axios.post('/users/signup', formData);
+            console.log(data)
             setAuthHeader(data.token);
             return data;
         } catch (error) {

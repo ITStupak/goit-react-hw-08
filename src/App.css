@@ -1,18 +1,16 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 0.5rem;
 }
-.title {
-  font-size: 42px;
-  text-align: center;
-  margin-bottom: 16px;
-}
-.form_wrapper {
-  padding: 0 8px;
+.loader {
+  padding: 96px 0;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 16px;
+}
+.text {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
 }

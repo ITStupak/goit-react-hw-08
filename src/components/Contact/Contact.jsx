@@ -9,6 +9,15 @@ const Contact = ({ id, name, number }) => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectIsLoading);
 
+  const handleDeleteContact = (contactId) => {
+    dispatch(deleteContact(contactId))
+      .unwrap()
+      .then((data) => {
+        toast.success(`Contact ${data.name} was deleted!`);
+      })
+      .catch(toast.error("Something went wrong"));
+  };
+
   return (
     <>
       <ul className={css["card-items"]}>

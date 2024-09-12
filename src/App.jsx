@@ -10,6 +10,8 @@ import { Layout } from "./components/Layout";
 import { Route, Routes } from "react-router-dom";
 import { RestrictedRoute } from "./components/RestrictedRoute";
 import { PrivateRoute } from "./components/PrivateRoute";
+import { Loader } from "./components/Loader";
+import "./App.css";
 
 const ContactsPage = lazy(() => import("./pages/ContactsPage/ContactsPage"));
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
@@ -20,8 +22,6 @@ const RegistrationPage = lazy(() =>
 
 const App = () => {
   const dispatch = useDispatch();
-  // const isLoggedIn = useSelector(selectIsLoggedIn);
-  // const user = useSelector(selectUser);
 
   useEffect(() => {
     dispatch(refresh());
@@ -30,7 +30,10 @@ const App = () => {
   const isRefreshing = useSelector(selectIsRefreshing);
 
   return isRefreshing ? (
-    <b>Refreshing user...</b>
+    <div className="loader">
+      <p className="text">Refreshing user...</p>
+      <Loader />
+    </div>
   ) : (
     <Layout>
       <Routes>

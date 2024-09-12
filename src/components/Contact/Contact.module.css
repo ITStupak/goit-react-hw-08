@@ -28,3 +28,8 @@
   border: 1px solid white;
   cursor: pointer;
 }
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}

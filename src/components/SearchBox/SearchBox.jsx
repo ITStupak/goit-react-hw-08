@@ -14,7 +14,7 @@ const SearchBox = () => {
   return (
     <div className={css["filter-wrapper"]}>
       <label className={css["search-label"]}>
-        <span>Find contacts by name:</span>
+        <span className={css.title}>Find contacts by name or phone:</span>
         <input
           className={css["search-input"]}
           type="text"

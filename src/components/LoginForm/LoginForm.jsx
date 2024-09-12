@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { login } from "../../redux/auth/operations";
 import css from "../LoginForm/LoginForm.module.css";
 import { selectError } from "../../redux/auth/selectors";
+import toast from "react-hot-toast";
 
 const LoginForm = () => {
   const emailRegExp = /^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/;
@@ -21,12 +22,21 @@ const LoginForm = () => {
   const INITIAL_VALUES = { email: "", password: "" };
   const emailId = nanoid();
   const passwordId = nanoid();
+
   const dispatch = useDispatch();
   const handleSubmit = (values, action) => {
-    dispatch(login(values));
+    dispatch(login(values))
+      .unwrap()
+      .then((data) => {
+        toast.success(`Hello ${data.user.name}!`);
+      })
+      .catch(() => {
+        toast.error("Wrong login or password!");
+      });
     action.resetForm();
   };
   const error = useSelector(selectError);
+
   return (
     <Formik
       initialValues={INITIAL_VALUES}
@@ -72,11 +82,6 @@ const LoginForm = () => {
           >
             Login
           </button>
-          {error && (
-            <span className={css.errorText}>
-              Oops, some error occured {error}
-            </span>
-          )}
         </Form>
       )}
     </Formik>
